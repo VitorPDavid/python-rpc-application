@@ -22,4 +22,4 @@ def connect_to_database():
         db.connect()
         yield db
     db.close()
-    print("claose DB connection")
+    print("close DB connection")
