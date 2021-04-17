@@ -2,8 +2,9 @@ import sys
 
 from xmlrpc.server import SimpleXMLRPCRequestHandler, SimpleXMLRPCServer
 
-from .rpc_functions import get_grade, get_grades, get_cr, set_grade
-from .rpc_functions import set_student
+from .rpc_functions import set_grade, list_student_grades, get_grade, get_cr
+from .rpc_functions import set_student, list_students
+from .rpc_functions import set_subject, list_subjects
 
 
 class RequestHandler(SimpleXMLRPCRequestHandler):
@@ -18,10 +19,15 @@ def exec_server(port):
         server.register_introspection_functions()
 
         server.register_function(set_student, 'set_student')
-        
-        server.register_function(get_grades, 'get_grades')
-        server.register_function(get_cr, 'get_cr')
+        server.register_function(list_students, 'list_students')
+
+        server.register_function(set_subject, 'set_subject')
+        server.register_function(list_subjects, 'list_subjects')
+
         server.register_function(set_grade, 'set_grade')
+        server.register_function(get_grade, 'get_grade')
+        server.register_function(list_student_grades, 'list_student_grades')
+        server.register_function(get_cr, 'get_cr')
 
         try:
             server.serve_forever()

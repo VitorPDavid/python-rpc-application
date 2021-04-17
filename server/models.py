@@ -12,10 +12,17 @@ class Student(Model):
     class Meta:
         database = db
 
+class Subject(Model):
+    code = CharField(unique=True)
+    name = CharField()
+
+    class Meta:
+        database = db
+
 class Grade(Model):
     student = ForeignKeyField(Student, backref='grades')
     grade = FloatField()
-    subject_code = CharField()
+    subject = ForeignKeyField(Subject, backref='grades')
 
     class Meta:
         database = db
@@ -27,11 +34,11 @@ def create_database():
 
 @contextmanager
 def connect_to_database():
-    print("Server: Open DB connection")
+    # Open DB connection
     if not db.is_closed():
         yield db
     else:
         db.connect()
         yield db
     db.close()
-    print("Server: close DB connection")
+    # close DB connection

@@ -15,7 +15,7 @@ def exec_client(port):
             continue
 
         run_command(command, server_connection)
-        time.sleep(1)
+        time.sleep(2)
 
 if __name__ == '__main__':
     port = 8100
